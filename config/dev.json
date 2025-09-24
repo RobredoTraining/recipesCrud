@@ -1,0 +1,13 @@
+{
+  "port": 3000,
+  "db": {
+    "host": "localhost",
+    "port": 27017,
+    "name": "recipes_dev"
+  },
+  "jwt": {
+    "secret": "dev_secret_key",
+    "expiresIn": "1d"
+  },
+  "logging": true
+}

@@ -1,0 +1,14 @@
+{
+    "port": 8000,
+    "db": {
+      "host": "prod.mongodb.net",
+      "port": 27017,
+      "name": "recipes_prod"
+    },
+    "jwt": {
+      "secret": "super_secure_production_key",
+      "expiresIn": "1h"
+    },
+    "logging": false
+  }
+  
