@@ -6,7 +6,7 @@
       "name": "recipes_prod"
     },
     "jwt": {
-      "secret": "super_secure_production_key",
+      "secret": "JGZJo2dpEmdyzNYbVfWBVJq/Fs6zDSP61C4T4XzsDa1r01WWysohlKOoqFE/oigrc7ol97B28oEiNPcM1MgAhA==",
       "expiresIn": "1h"
     },
     "logging": false

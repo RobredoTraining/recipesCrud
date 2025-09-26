@@ -1,60 +1,60 @@
 const Recipe = require("../models/recipe");
-
+const createError = require("http-errors");
 
 // Crear receta
-exports.createRecipe = async (req, res) => {
+exports.createRecipe = async (req, res, next) => {
   try {
     const recipe = new Recipe(req.body);
     await recipe.save();
     res.status(201).json(recipe);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } catch (err) {
+    next(createError(400, err.message)); // pasa al middleware de errores
   }
 };
 
 // Obtener todas
-exports.getRecipes = async (req, res) => {
+exports.getRecipes = async (req, res, next) => {
   try {
     const recipes = await Recipe.find();
     res.json(recipes);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    next(createError(500, err.message));
   }
 };
 
-// Obtener una
-exports.getRecipeById = async (req, res) => {
+// Obtener una por ID
+exports.getRecipeById = async (req, res, next) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
-    if (!recipe) return res.status(404).json({ message: "Not found" });
+    if (!recipe) throw createError(404, "Recipe not found");
     res.json(recipe);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    next(err);
   }
 };
 
 // Actualizar
-exports.updateRecipe = async (req, res) => {
+exports.updateRecipe = async (req, res, next) => {
   try {
     const recipe = await Recipe.findByIdAndUpdate(
       req.params.id,
       req.body,
       { new: true }
     );
-    if (!recipe) return res.status(404).json({ message: "Not found" });
+    if (!recipe) throw createError(404, "Recipe not found");
     res.json(recipe);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } catch (err) {
+    next(err);
   }
 };
 
 // Eliminar
-exports.deleteRecipe = async (req, res) => {
+exports.deleteRecipe = async (req, res, next) => {
   try {
     const recipe = await Recipe.findByIdAndDelete(req.params.id);
-    if (!recipe) return res.status(404).json({ message: "Not found" });
+    if (!recipe) throw createError(404, "Recipe not found");
     res.json({ message: "Recipe deleted" });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    next(err);
   }
 };
