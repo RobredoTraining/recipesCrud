@@ -3,6 +3,13 @@
   "db": {
     "host": "localhost",
     "port": 27017,
-    "name": "dev"
+    "name": "defaultDB"
+  },
+  "cors": {
+    "allowedOrigins": ["http://localhost:5173"]
+  },
+  "rateLimit": {
+    "windowMs": 900000,
+    "max": 100
   }
 }

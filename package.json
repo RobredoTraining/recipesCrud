@@ -7,8 +7,8 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
-    "dev": "NODE_ENV=development nodemon src/server.js",
-    "start": "NODE_ENV=production node src/server.js",
+    "dev": "NODE_ENV=development nodemon server.js",
+    "start": "NODE_ENV=production node server.js",
     "lint": "eslint .",
     "test": "jest"
   },
@@ -20,6 +20,7 @@
     "express-rate-limit": "^8.1.0",
     "helmet": "^8.1.0",
     "http-errors": "^2.0.0",
+    "joi": "^18.0.1",
     "mongoose": "^8.17.2"
   },
   "devDependencies": {

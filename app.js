@@ -7,6 +7,7 @@ const errorHandler = require("./middleware/errorHandler");
 const helmet = require("helmet");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+const notFound = require("./middleware/notFound");
 
 const app = express();
 
@@ -34,6 +35,9 @@ connectDB(db);
 
 // 📌 Routes
 app.use("/api/recipes", recipesRoutes);
+
+// 404 handler
+app.use(notFound);
 
 // ❌ Error handler
 app.use(errorHandler);
