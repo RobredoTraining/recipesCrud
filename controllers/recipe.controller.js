@@ -58,3 +58,23 @@ exports.deleteRecipe = async (req, res, next) => {
     next(err);
   }
 };
+
+// Buscar recetas por texto completo
+exports.searchRecipes = async (req, res, next) => {
+  try {
+    const { q } = req.query; // ejemplo: /api/recipes/search?q=pizza
+
+    if (!q) {
+      return res.status(400).json({ error: "Missing search query 'q'" });
+    }
+
+    const recipes = await Recipe.find(
+      { $text: { $search: q } }, // busca en los campos indexados
+      { score: { $meta: "textScore" } } // devuelve el score
+    ).sort({ score: { $meta: "textScore" } }); // ordena por relevancia
+
+    res.json(recipes);
+  } catch (err) {
+    next(err);
+  }
+};

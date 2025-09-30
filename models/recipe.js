@@ -8,7 +8,13 @@ const recipeSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+});
+
+recipeSchema.index({
+  title: "text",
+  ingredients: "text",
+  instructions: "text"
 });
 
 module.exports = mongoose.model('Recipe', recipeSchema);
